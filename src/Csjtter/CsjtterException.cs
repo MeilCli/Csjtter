@@ -10,9 +10,11 @@ namespace Csjtter {
     /// Csjtterのさまざまな例外をまとめるクラス
     /// </summary>
     public class CsjtterException : Exception {
-        private int httpStatusCode;
-        private int errorCode;
-        private string message,httpStatusMessage,errorMessage;
+        public int httpStatusCode { private set; get; }
+        public int errorCode { private set; get; }
+        public string message { private set; get; }
+        public string httpStatusMessage { private set; get; }
+        public string errorMessage { private set; get; }
 
         /// <summary>
         /// 基本コンストラクタ
@@ -20,6 +22,7 @@ namespace Csjtter {
         /// <param name="message">ExceptionMessage</param>
         public CsjtterException(string message)
             : base(message) {
+            this.message = message;
         }
 
         /// <summary>
@@ -30,48 +33,11 @@ namespace Csjtter {
         /// <param name="errorCode">twitterResponseのerrorCode</param>
         public CsjtterException(string message,int httpStatuscode,int errorCode)
             : base(message) {
-            httpStatusMessage = toHttpStatusCodeSubMessage(httpStatusCode);
-            errorMessage = toErrorCodeSubMessage(errorCode);
-        }
-
-        /// <summary>
-        /// 例外messageを返します
-        /// </summary>
-        /// <returns>message</returns>
-        public string getMessage() {
-            return message;
-        }
-
-        /// <summary>
-        /// httpResponseのhttpStatusCodeを返します
-        /// </summary>
-        /// <returns>httpStatusCode</returns>
-        public int getHttpStatusCode() {
-            return httpStatusCode;
-        }
-
-        /// <summary>
-        /// httpStatusCodeに関するmessageを返します
-        /// </summary>
-        /// <returns>httpStatusMessage</returns>
-        public string getHttpStatusMessage() {
-            return httpStatusMessage;
-        }
-
-        /// <summary>
-        /// twitterResponseのerrorCodeを返します
-        /// </summary>
-        /// <returns>errorCode</returns>
-        public int getErrorCode() {
-            return errorCode;
-        }
-
-        /// <summary>
-        /// errorCodeに関するmessageを返します
-        /// </summary>
-        /// <returns>errorMessage</returns>
-        public string getErrorMessage() {
-            return errorMessage;
+            this.message = message;
+            this.httpStatusCode = httpStatusCode;
+            this.errorCode = errorCode;
+            this.httpStatusMessage = toHttpStatusCodeSubMessage(httpStatusCode);
+            this.errorMessage = toErrorCodeSubMessage(errorCode);
         }
 
         /// <summary>
