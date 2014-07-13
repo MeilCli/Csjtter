@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Csjtter.src.Csjtter {
+namespace Csjtter {
     public class AccountData : AccountKey {
         public string name { private set; get; }
         public string screenName { private set; get; }
