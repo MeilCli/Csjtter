@@ -11,5 +11,10 @@ namespace Csjtter {
             set { _authorizeURL = value; }
             get { return _authorizeURL; }
         }
+        private int _timeout;
+        public int timeout {
+            set { _timeout = value; }
+            get { return _timeout; }
+        }
     }
 }
