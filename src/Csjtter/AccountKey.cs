@@ -12,17 +12,27 @@ namespace Csjtter {
     public class AccountKey {
         public string consumerKey { private set; get; }
         public string consumerSecret { private set; get; }
-        public string accessToken { private set; get; }
-        public string accessTokenSecret { private set; get; }
+        public string accessToken { internal set; get; }
+        private string _accessTokenSecret="";
+        public string accessTokenSecret {
+            internal set {
+                if(value!=null) {
+                    _accessTokenSecret=value;
+                }
+            }
+            get {
+                return _accessTokenSecret;
+            }
+        }
 
         /// <summary>
         /// accessTokenを最初に取得するのに使うコンストラクタ
         /// </summary>
         /// <param name="consumerKey">consumerKey</param>
         /// <param name="consumerSecret">consumerSecret</param>
-        public AccountKey(string consumerKey,string consumerSecret) {
-            this.consumerKey = consumerKey;
-            this.consumerSecret = consumerSecret;
+        public AccountKey(string consumerKey, string consumerSecret) {
+            this.consumerKey=consumerKey;
+            this.consumerSecret=consumerSecret;
         }
 
         /// <summary>
@@ -32,11 +42,15 @@ namespace Csjtter {
         /// <param name="consumerSecret">consumerSecret</param>
         /// <param name="accessToken">accessToken</param>
         /// <param name="accessTokenSecret">accessTokenSecret</param>
-        public AccountKey(string consumerKey,string consumerSecret,string accessToken,string accessTokenSecret) {
-            this.consumerKey = consumerKey;
-            this.consumerSecret = consumerSecret;
-            this.accessToken = accessToken;
-            this.accessTokenSecret = accessTokenSecret;
+        public AccountKey(string consumerKey, string consumerSecret, string accessToken, string accessTokenSecret) {
+            this.consumerKey=consumerKey;
+            this.consumerSecret=consumerSecret;
+            this.accessToken=accessToken;
+            this.accessTokenSecret=accessTokenSecret;
+        }
+
+        public override string ToString() {
+            return "consumerKey="+consumerKey+"&consumerSecret="+consumerSecret+"&accessToken="+accessToken+"&accessTokenSecret="+accessTokenSecret;
         }
     }
 }

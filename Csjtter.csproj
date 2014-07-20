@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -42,12 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Csjtter\AccountData.cs" />
+    <Compile Include="src\Csjtter\CsjtterBase.cs" />
     <Compile Include="src\Csjtter\CsjtterConfig.cs" />
     <Compile Include="src\Csjtter\CsjtterException.cs" />
     <Compile Include="src\Csjtter\AccountKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Csjtter\http\HttpData.cs" />
     <Compile Include="src\Csjtter\http\HttpHelper.cs" />
     <Compile Include="src\Csjtter\http\Oauth.cs" />
+    <Compile Include="src\Csjtter\test\MainTest.cs" />
+    <Compile Include="src\Csjtter\test\OauthTest.cs" />
     <Compile Include="src\Csjtter\util\CsjtterUtil.cs" />
   </ItemGroup>
   <ItemGroup />
