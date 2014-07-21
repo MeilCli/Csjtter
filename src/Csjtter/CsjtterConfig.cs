@@ -24,6 +24,12 @@ namespace Csjtter {
             get { return _oauthTokenURL; }
         }
 
+        private string _baseRestURL="https://api.twitter.com/1.1/";
+        public string baseRestURL {
+            set { _baseRestURL=value; }
+            get { return _baseRestURL; }
+        }
+
         private int _timeout=10;
         /// <summary>
         /// second
@@ -35,12 +41,6 @@ namespace Csjtter {
                 } 
             }
             get { return _timeout; }
-        }
-
-        private bool _include_entities=true;
-        public bool include_entities {
-            set { _include_entities=value; }
-            get { return _include_entities; }
         }
 
         /// <summary>

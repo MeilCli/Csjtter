@@ -45,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Csjtter\AccountData.cs" />
+    <Compile Include="src\Csjtter\api\APIConstant.cs" />
+    <Compile Include="src\Csjtter\api\APIRes.cs" />
+    <Compile Include="src\Csjtter\api\StatusesRes.cs" />
+    <Compile Include="src\Csjtter\Csjtter.cs" />
     <Compile Include="src\Csjtter\CsjtterBase.cs" />
     <Compile Include="src\Csjtter\CsjtterConfig.cs" />
     <Compile Include="src\Csjtter\CsjtterException.cs" />
@@ -53,7 +57,6 @@
     <Compile Include="src\Csjtter\http\HttpData.cs" />
     <Compile Include="src\Csjtter\http\HttpHelper.cs" />
     <Compile Include="src\Csjtter\http\Oauth.cs" />
-    <Compile Include="src\Csjtter\http\OauthBase.cs" />
     <Compile Include="src\Csjtter\test\MainTest.cs" />
     <Compile Include="src\Csjtter\test\OauthTest.cs" />
     <Compile Include="src\Csjtter\util\CsjtterUtil.cs" />

@@ -1,12 +1,8 @@
 ﻿using Csjtter.util;
-using OAuth;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Csjtter.http {
     internal class Oauth {
@@ -105,7 +101,7 @@ namespace Csjtter.http {
             byte[] dataBuffer=System.Text.Encoding.UTF8.GetBytes(baseString);
             byte[] hashBytes=hmacsha1.ComputeHash(dataBuffer);
 
-            return Convert.ToBase64String(hashBytes);
+            return CsjtterUtil.toBase64(hashBytes);
         }
     }
 }

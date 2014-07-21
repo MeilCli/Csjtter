@@ -105,7 +105,7 @@ namespace Csjtter {
             return new AccountData(key, name, screenName, long.Parse(userId));
         }
 
-        public void test() {
+        /*public void test() {
             HttpData data=new HttpData();
             data.url="https://api.twitter.com/1.1/statuses/update.json";
             data.param=new Dictionary<string, string>() { {"status","C#でPOST"}};
@@ -118,7 +118,7 @@ namespace Csjtter {
             }
             string text=res.Content.ReadAsStringAsync().Result;
             Console.Out.WriteLine(text);
-        }
+        }*/
         
         /*public void test() {
             HttpData data=new HttpData();
