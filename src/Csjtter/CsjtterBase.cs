@@ -57,9 +57,9 @@ namespace Csjtter {
             string oauthToken="";
             string oauthTokenSecret="";
             foreach(string s in text.Split('&')) {
-                if(s.StartsWith("oauth_token")==true) {
+                if(s.StartsWith("oauth_token=")==true) {
                     oauthToken=s.Substring(s.IndexOf('=')+1);
-                } else if(s.StartsWith("oauth_token_secret")==true) {
+                } else if(s.StartsWith("oauth_token_secret=")==true) {
                     oauthTokenSecret=s.Substring(s.IndexOf('=')+1);
                 }
             }
@@ -88,15 +88,15 @@ namespace Csjtter {
             string screenName="";
             string name="";
             foreach(string s in text.Split('&')) {
-                if(s.StartsWith("oauth_token")==true) {
+                if(s.StartsWith("oauth_token=")==true) {
                     oauthToken=s.Substring(s.IndexOf('=')+1);
-                } else if(s.StartsWith("oauth_token_secret")==true) {
+                } else if(s.StartsWith("oauth_token_secret=")==true) {
                     oauthTokenSecret=s.Substring(s.IndexOf('=')+1);
-                } else if(s.StartsWith("user_id")==true) {
+                } else if(s.StartsWith("user_id=")==true) {
                     userId=s.Substring(s.IndexOf('=')+1);
-                } else if(s.StartsWith("screen_name")==true) {
+                } else if(s.StartsWith("screen_name=")==true) {
                     screenName=s.Substring(s.IndexOf('=')+1);
-                } else if(s.StartsWith("name")==true) {
+                } else if(s.StartsWith("name=")==true) {
                     name=s.Substring(s.IndexOf('=')+1);
                 }
             }
@@ -105,22 +105,22 @@ namespace Csjtter {
             return new AccountData(key, name, screenName, long.Parse(userId));
         }
 
-        /*public void test() {
+        public void test() {
             HttpData data=new HttpData();
             data.url="https://api.twitter.com/1.1/statuses/update.json";
-            data.param=new Dictionary<string, string>() { {"status","testetetsttetetetetettest"}};
+            data.param=new Dictionary<string, string>() { {"status","C#でPOST"}};
             HttpResponseMessage res=http.post(key, data);
             CsjtterException exception=checkError(res);
             if(exception!=null) {
                 Console.Out.WriteLine("request message");
-                Console.Out.WriteLine(res.RequestMessage.Headers.ToString());
+                Console.Out.WriteLine(res.RequestMessage.Content.ToString()+res.RequestMessage.Content.ReadAsStringAsync().Result);
                 throw exception;
             }
             string text=res.Content.ReadAsStringAsync().Result;
             Console.Out.WriteLine(text);
-        }*/
-
-        public void test() {
+        }
+        
+        /*public void test() {
             HttpData data=new HttpData();
             data.url="https://api.twitter.com/1.1/statuses/home_timeline.json";
             HttpResponseMessage res=http.get(key, data);
@@ -131,7 +131,7 @@ namespace Csjtter {
                 throw exception;
             }
             string text=res.Content.ReadAsStringAsync().Result;
-            Console.Out.WriteLine(text);
-        }
+           Console.Out.WriteLine(text);
+        }*/
     }
 }

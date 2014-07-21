@@ -10,5 +10,5 @@ C#ですがJava風に書きます
 
 This source is The MIT License.
 
-Include Json.NET library[MIT License][json.net]
+Include Json.NET library [MIT License][json.net]
 [json.net]: https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md

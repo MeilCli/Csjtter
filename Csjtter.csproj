@@ -53,6 +53,7 @@
     <Compile Include="src\Csjtter\http\HttpData.cs" />
     <Compile Include="src\Csjtter\http\HttpHelper.cs" />
     <Compile Include="src\Csjtter\http\Oauth.cs" />
+    <Compile Include="src\Csjtter\http\OauthBase.cs" />
     <Compile Include="src\Csjtter\test\MainTest.cs" />
     <Compile Include="src\Csjtter\test\OauthTest.cs" />
     <Compile Include="src\Csjtter\util\CsjtterUtil.cs" />

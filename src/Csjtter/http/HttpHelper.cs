@@ -13,15 +13,17 @@ using System.Net;
 
 namespace Csjtter.http {
     internal class HttpHelper : Oauth {
-        private HttpClient client;
 
         public HttpHelper(CsjtterConfig config)
-            : base(config) {
+            : base(config) {          
+        }
+
+        private HttpClient createHttpClient() {
             HttpClientHandler handler=new HttpClientHandler();
             if(handler.SupportsAutomaticDecompression==true) {
                 handler.AutomaticDecompression=DecompressionMethods.GZip|DecompressionMethods.Deflate;
             }
-            client=new HttpClient(handler);
+            return new HttpClient(handler);
         }
 
         public HttpResponseMessage post(AccountKey key, HttpData data) {
@@ -31,26 +33,34 @@ namespace Csjtter.http {
         }
 
         public HttpResponseMessage post(List<AccountKey> keys, HttpData data) {
-            MultipartFormDataContent content=new MultipartFormDataContent();
-            if(data.param.Count>0) {
-                FormUrlEncodedContent param=new FormUrlEncodedContent(data.param);
-                content.Add(param);
-            }
-            foreach(KeyValuePair<string, string> v in data.fparam) {
-                try {
-                    FileStream stream=File.Open(v.Value, FileMode.Open);
-                    StreamContent sc=new StreamContent(stream);
-                    string type;
-                    if(v.Key.EndsWith("png")==true) {
-                        type="png";
-                    } else if(v.Key.EndsWith("gif")==true) {
-                        type="gif";
-                    } else {
-                        type="jpeg";
+            HttpContent content=null;
+            if(data.fparam.Count==0) {
+                content=new FormUrlEncodedContent(data.param);
+            } else {
+                MultipartFormDataContent con=new MultipartFormDataContent();
+                if(data.param.Count>0) {
+                    foreach(KeyValuePair<string, string> v in data.param) {
+                        StringContent c=new StringContent(v.Value);
+                        con.Add(c, v.Key);
                     }
-                    sc.Headers.ContentType=MediaTypeHeaderValue.Parse("image/"+type);
-                    content.Add(sc, "image", v.Key);
-                } catch(Exception) { }
+                }
+                foreach(KeyValuePair<string, string> v in data.fparam) {
+                    try {
+                        FileStream stream=File.Open(v.Value, FileMode.Open);
+                        StreamContent sc=new StreamContent(stream);
+                        string type;
+                        if(v.Key.EndsWith("png")==true) {
+                            type="png";
+                        } else if(v.Key.EndsWith("gif")==true) {
+                            type="gif";
+                        } else {
+                            type="jpeg";
+                        }
+                        sc.Headers.ContentType=MediaTypeHeaderValue.Parse("image/"+type);
+                        con.Add(sc, "image", v.Key);
+                    } catch(Exception) { }
+                }
+                content=con;
             }
             HttpResponseMessage res=null;
             foreach(AccountKey key in keys) {
@@ -117,28 +127,25 @@ namespace Csjtter.http {
             return res;
         }
 
-        private HttpResponseMessage post(string url, string header, MultipartFormDataContent content) {
+        private HttpResponseMessage post(string url, string header, HttpContent content) {
+            HttpClient client=createHttpClient(); 
             client.Timeout=TimeSpan.FromSeconds(config.timeout);
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("Csjtter");
-            client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("OAuth","oauth_consumer_key=\"wlMDRIfgvs1Oc2i1e52GFJqRr\", oauth_nonce=\"72d763acee509a91f8febc1003e6bca5\", oauth_signature=\"TZAGNq4bD5hcfY1Q1tuUiF7G2ak%3D\", oauth_signature_method=\"HMAC-SHA1\", oauth_timestamp=\"1405889128\", oauth_token=\"262154677-mQE2XYJpn4TOFhvCcNyoFAZxDb1u4sCbgFemNXPs\", oauth_version=\"1.0\"");
-            if(config.isLog>1) {
-                Console.Out.WriteLine("request header");
-                Console.Out.WriteLine(client.DefaultRequestHeaders.ToString());
-            }
-            return client.PostAsync(url,content).Result;
+            client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("OAuth", header);
+            return client.PostAsync(url, content).Result;
         }
 
         private HttpResponseMessage get(string url, string header) {
+            HttpClient client=createHttpClient(); 
             client.Timeout=TimeSpan.FromSeconds(config.timeout);
             client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("OAuth", header);
             return client.GetAsync(url).Result;
         }
 
         private HttpResponseMessage delete(string url, string header) {
+            HttpClient client=createHttpClient(); 
             client.Timeout=TimeSpan.FromSeconds(config.timeout);
-            HttpRequestMessage mes=new HttpRequestMessage(HttpMethod.Delete, url);
-            mes.Headers.Add("Authorization", header);
-            return client.SendAsync(mes).Result;
+            client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("OAuth", header);
+            return client.DeleteAsync(url).Result;
         }
     }
 }
