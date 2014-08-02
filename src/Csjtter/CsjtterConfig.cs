@@ -50,5 +50,7 @@ namespace Csjtter {
             set;
             get;
         }
+
+        public static readonly bool isTest=true;
     }
 }

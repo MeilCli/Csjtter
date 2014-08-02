@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Csjtter.api {
     public interface StatusesRes {
-        void statusesUpdate(string status);
+        Status statusesUpdate(string status, Dictionary<string, string> param=null);
     }
 }

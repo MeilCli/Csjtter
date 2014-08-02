@@ -40,6 +40,13 @@ namespace Csjtter {
             return new CsjtterException(errorMssage, (int)res.StatusCode, code);
         }
 
+        protected void checkErrorAndThrow(HttpResponseMessage res) {
+            CsjtterException e=checkError(res);
+            if(e!=null) {
+                throw e;
+            }
+        }
+
         public AccountKey getRequestToken() {
             return getRequestToken(null);
         }
@@ -119,7 +126,7 @@ namespace Csjtter {
             string text=res.Content.ReadAsStringAsync().Result;
             Console.Out.WriteLine(text);
         }*/
-        
+
         /*public void test() {
             HttpData data=new HttpData();
             data.url="https://api.twitter.com/1.1/statuses/home_timeline.json";

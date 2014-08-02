@@ -23,6 +23,11 @@ namespace Csjtter.http {
             return new HttpClient(handler);
         }
 
+        private void paramCheck(HttpData data) {
+            data.param.Add("include_entities", "true");
+            data.param.Add("include_my_retweet", "true");
+        }
+
         public HttpResponseMessage post(AccountKey key, HttpData data) {
             List<AccountKey> keys=new List<AccountKey>();
             keys.Add(key);
@@ -30,6 +35,7 @@ namespace Csjtter.http {
         }
 
         public HttpResponseMessage post(List<AccountKey> keys, HttpData data) {
+            paramCheck(data);
             HttpContent content=null;
             if(data.fparam.Count==0) {
                 content=new FormUrlEncodedContent(data.param);
@@ -77,6 +83,7 @@ namespace Csjtter.http {
         }
 
         public HttpResponseMessage get(List<AccountKey> keys, HttpData data) {
+            paramCheck(data);
             StringBuilder request=new StringBuilder();
             foreach(KeyValuePair<string, string> v in data.param) {
                 if(request.Length>0) {
@@ -104,6 +111,7 @@ namespace Csjtter.http {
         }
 
         public HttpResponseMessage delete(List<AccountKey> keys, HttpData data) {
+            paramCheck(data);
             StringBuilder request=new StringBuilder();
             foreach(KeyValuePair<string, string> v in data.param) {
                 if(request.Length>0) {
