@@ -47,6 +47,7 @@
     <Compile Include="src\Csjtter\AccountData.cs" />
     <Compile Include="src\Csjtter\api\APIConstant.cs" />
     <Compile Include="src\Csjtter\api\APIRes.cs" />
+    <Compile Include="src\Csjtter\api\FavoritesRes.cs" />
     <Compile Include="src\Csjtter\api\StatusesRes.cs" />
     <Compile Include="src\Csjtter\Csjtter.cs" />
     <Compile Include="src\Csjtter\CsjtterBase.cs" />

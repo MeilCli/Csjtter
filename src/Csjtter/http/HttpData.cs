@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Csjtter.http {
     public class HttpData {
+
+        public HttpData(string url) {
+            this.url = url;
+        }
+
         public string url { set; get; }
         private Dictionary<string, string> _param;
         public Dictionary<string, string> param {

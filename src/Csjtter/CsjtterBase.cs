@@ -52,9 +52,8 @@ namespace Csjtter {
         }
 
         public AccountKey getRequestToken(string callback) {
-            HttpData data=new HttpData();
+            HttpData data=new HttpData(config.requestTokenURL);
             data.callback=callback;
-            data.url=config.requestTokenURL;
             HttpResponseMessage res=http.post(key, data);
             CsjtterException exception=checkError(res);
             if(exception!=null) {
@@ -80,8 +79,7 @@ namespace Csjtter {
         }
 
         public AccountData getOauthToken(string oauth_verifier) {
-            HttpData data=new HttpData();
-            data.url=config.oauthToknURL;
+            HttpData data=new HttpData(config.oauthToknURL);
             data.param=new Dictionary<string, string> { { "oauth_verifier", oauth_verifier } };
             HttpResponseMessage res=http.post(key, data);
             CsjtterException exception=checkError(res);

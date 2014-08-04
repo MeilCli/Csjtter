@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Csjtter.api {
-    public interface APIRes:StatusesRes,FavoritesRes {
+    public interface FavoritesRes {
+        Status favoritesCreate(long id,Dictionary<string,string> param = null);
     }
 }

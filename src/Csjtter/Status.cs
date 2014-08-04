@@ -103,6 +103,7 @@ namespace Csjtter {
                 retweetedStatus=new Status(obj.getJsonObject("retweeted_status"));
             }
             source=obj.getString("source");
+            text = obj.getString("text");
             if(obj.containsKey("user")) {
                 user=new User(obj.getJsonObject("user"));
             }
