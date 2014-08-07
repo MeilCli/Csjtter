@@ -59,5 +59,19 @@ namespace Csjtter.json {
             }
             return ar[index].ToObject<long>();
         }
+
+        public float getFloat(int index, float defaultValue = 0) {
+            if(ar[index] == null) {
+                return defaultValue;
+            }
+            return ar[index].ToObject<float>();
+        }
+
+        public double getDouble(int index, double defaultValue = 0) {
+            if(ar[index] == null) {
+                return defaultValue;
+            }
+            return ar[index].ToObject<double>();
+        }
     }
 }

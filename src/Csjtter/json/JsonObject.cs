@@ -76,5 +76,25 @@ namespace Csjtter.json {
             }
             return obj[key].ToObject<long>();
         }
+
+        public float getFloat(string key, float defaultValue = 0) {
+            if(obj[key] == null || obj[key].Type == JTokenType.Null) {
+                if(CsjtterConfig.isTest == true) {
+                    System.Console.Out.WriteLine("JsonObject#getFloat null field " + key);
+                }
+                return defaultValue;
+            }
+            return obj[key].ToObject<float>();
+        }
+
+        public double getDouble(string key, double defaultValue = 0) {
+            if(obj[key] == null || obj[key].Type == JTokenType.Null) {
+                if(CsjtterConfig.isTest == true) {
+                    System.Console.Out.WriteLine("JsonObject#getDouble null field " + key);
+                }
+                return defaultValue;
+            }
+            return obj[key].ToObject<double>();
+        }
     }
 }
